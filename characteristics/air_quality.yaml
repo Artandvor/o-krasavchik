@@ -1,0 +1,15 @@
+key: air_quality
+title: Чистый воздух
+group: Климат
+description: Месяцы, когда среднемесячный PM2.5 ≤ 10 мкг/м³ (модель CAMS). Пока на уровне района — сетка модели ~11 км.
+scope: region
+type: months
+tool: climate
+params: {metric: air, pm25_max: 10}
+sources: ["Open-Meteo Air Quality (CAMS)"]
+ttl_days: 365
+trust: {open_api: 0.7}
+demand: 0.04
+search:
+  synonyms: ["чистый воздух", "воздух", "аллерг", "астм", "дышать"]
+  desired: true

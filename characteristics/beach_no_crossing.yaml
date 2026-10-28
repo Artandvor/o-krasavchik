@@ -1,0 +1,20 @@
+key: beach_no_crossing
+title: К морю без перехода через трассу и пути
+group: Доступность
+description: Нужно ли по пути на пляж переходить железную дорогу или крупную автодорогу. В Сочи ж/д идёт вдоль берега — это частая скрытая проблема.
+scope: hotel
+type: bool
+tool: walk_route
+params: {target: beach, metric: no_crossing}
+sources: ["OpenStreetMap: маршрут, ж/д, классы дорог, тоннели и переходы"]
+ttl_days: 180
+trust: {geo: 0.8, hotelier: 0.7}
+demand: 0.2
+hotelier:
+  ask_below: 0.6
+  question: "Нужно ли гостям по дороге на пляж переходить железную дорогу или оживлённую дорогу?"
+  hypothesis: "По маршруту на открытой карте: {summary}. Это так?"
+  fields: {value: bool}
+search:
+  synonyms: ["без перехода", "не переходить", "без трассы", "через пути", "через железн", "дети", "с детьми", "безопасн"]
+  desired: true

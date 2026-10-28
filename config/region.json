@@ -1,0 +1,28 @@
+{
+  "name": "Адлер, Сочи",
+  "hotels_bbox": [
+    43.405,
+    39.905,
+    43.455,
+    39.975
+  ],
+  "pad_m": 2500,
+  "far_bbox": [
+    43.2,
+    39.6,
+    43.8,
+    40.45
+  ],
+  "far_step_m": 150,
+  "dsm_cell_m": 10,
+  "climate_point": [
+    43.43,
+    39.92
+  ],
+  "sea_point": [
+    43.4,
+    39.9
+  ],
+  "max_hotels": 250,
+  "_comment": "bbox = [south, west, north, east]. hotels_bbox — где ищем отели; pad_m — отступ для зданий/дорог/POI; far_bbox — дальний рельеф для гор и горизонта"
+}

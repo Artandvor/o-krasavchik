@@ -1,0 +1,19 @@
+key: playground
+title: Детская площадка рядом
+group: С детьми
+description: Детская площадка в 400 м пешком.
+scope: hotel
+type: bool
+tool: poi_nearby
+params: {layer: playgrounds, radius_m: 400}
+sources: ["OpenStreetMap: детские площадки"]
+ttl_days: 365
+trust: {osm_tag: 0.7, hotelier: 0.8}
+demand: 0.15
+hotelier:
+  ask_below: 0.5
+  question: "Есть ли детская площадка на территории или рядом?"
+  fields: {value: bool}
+search:
+  synonyms: ["детск площадк", "площадк", "с детьми", "ребен", "ребён", "дети"]
+  desired: true

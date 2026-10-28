@@ -1,0 +1,20 @@
+key: wheelchair
+title: Доступно на коляске
+group: Доступность
+description: Доступность входа и номеров для гостей на коляске.
+scope: hotel
+type: enum
+values: ["да", "частично", "нет"]
+tool: osm_tag
+params: {tags: {wheelchair: {"yes": "да", "limited": "частично", "no": "нет"}}}
+sources: ["OpenStreetMap: отметка о доступности", "отельер"]
+ttl_days: 365
+trust: {osm_tag: 0.55, hotelier: 0.9}
+demand: 0.04
+hotelier:
+  ask_below: 0.7
+  question: "Доступен ли вход и номера для гостей на коляске? Есть ли лифт?"
+  fields: {value: enum, elevator: bool}
+search:
+  synonyms: ["коляск", "инвалид", "доступная среда", "wheelchair", "без ступенек"]
+  desired: "да"

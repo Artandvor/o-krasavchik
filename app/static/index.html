@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>О!дин шаг</title>
+  <meta name="description" content="Сначала закат, потом отель: вид из конкретного окна, рассчитанный по рельефу, домам и солнцу.">
+  <link rel="preload" href="/static/vendor/fonts/onest-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/vendor/fonts/onest-cyrillic-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="bar" id="bar">
+  <a class="logo" href="#/guest">О<b>!</b>дин шаг</a>
+  <nav class="roles" aria-label="Роль">
+    <a href="#/guest" data-role="guest">Гость</a>
+    <a href="#/host" data-role="host">Отельер</a>
+    <a href="#/ops" data-role="ops">Островок</a>
+  </nav>
+  <div class="right" id="barinfo"></div>
+</header>
+<main id="view"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/static/vendor/leaflet/leaflet.js"></script>
+<script src="/static/window.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

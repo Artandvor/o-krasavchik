@@ -1,0 +1,19 @@
+key: pets
+title: Можно с питомцем
+group: С питомцем
+description: Пускают ли с животными, до какого веса и за какую плату. Этого нет в открытых данных — спрашиваем отельера.
+scope: hotel
+type: bool
+tool: osm_tag
+params: {tags: {pets: {"yes": true, "no": false}, dog: {"yes": true, "no": false, "leashed": true}}}
+sources: ["отельер", "OpenStreetMap: отметка о животных (редко)"]
+ttl_days: 365
+trust: {osm_tag: 0.4, hotelier: 0.95}
+demand: 0.12
+hotelier:
+  ask_below: 0.9
+  question: "Можно ли жить с питомцем? Каких животных и до какого веса пускаете, сколько это стоит?"
+  fields: {value: bool, max_weight_kg: number, fee_rub: number, animals: list}
+search:
+  synonyms: ["с собак", "собак", "питом", "кошк", "с животн", "pet", "dog"]
+  desired: true

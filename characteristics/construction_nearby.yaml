@@ -1,0 +1,21 @@
+key: construction_nearby
+title: Стройка рядом
+group: Комфорт
+description: Отмеченная на открытой карте стройка в 300 м от отеля. Быстро устаревает — проверяется ежемесячно.
+scope: hotel
+type: bool
+tool: construction_nearby
+params: {radius_m: 300}
+sources: ["OpenStreetMap: стройплощадки и строящиеся здания"]
+ttl_days: 30
+trust: {osm_tag: 0.55, hotelier: 0.7}
+demand: 0.08
+hotelier:
+  ask_below: 0.0
+  ask_if_true: true
+  question: "Идёт ли сейчас стройка рядом с отелем? До какого времени?"
+  hypothesis: "В OpenStreetMap рядом отмечена стройка ({summary}). Она ещё идёт?"
+  fields: {value: bool}
+search:
+  synonyms: ["без стройк", "стройк", "строительств"]
+  desired: false

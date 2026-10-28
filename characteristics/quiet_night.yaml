@@ -1,0 +1,22 @@
+key: quiet_night
+title: Тишина ночью
+group: Комфорт
+description: Ночной уровень шума у каждой стороны здания — дороги по классу, ж/д, бары и клубы, аэропорт.
+scope: room
+type: enum
+values: ["тихо", "умеренно", "шумно"]
+ordinal: true
+tool: facade_noise
+params: {}
+sources: ["OpenStreetMap: дороги, ж/д, заведения, ВПП", "инженерная модель распространения шума"]
+ttl_days: 180
+trust: {geo: 0.6, hotelier: 0.7}
+demand: 0.35
+hotelier:
+  ask_below: 0.7
+  question: "Есть ли шумоизоляция или окна с двойным стеклопакетом? Какие номера самые тихие?"
+  hypothesis: "По модели шума самая тихая сторона — {summary}. Это совпадает с вашим опытом?"
+  fields: {value: enum, quiet_sides: list, soundproof_windows: bool}
+search:
+  synonyms: ["тих", "тишин", "спокойн", "выспаться", "без шума", "не шумн", "quiet", "тише", "тишь", "не шумно", "без соседей шумных"]
+  desired: "тихо"

@@ -1,0 +1,15 @@
+key: night_pharmacy
+title: Аптека, открытая ночью
+group: Что работает ночью
+description: Аптека с часами работы после 23:00 или круглосуточно в пешей доступности (1 км).
+scope: hotel
+type: bool
+tool: poi_nearby
+params: {layer: pois, filter: {amenity: pharmacy, healthcare: pharmacy}, radius_m: 1000, open_after: "23:00"}
+sources: ["OpenStreetMap: часы работы"]
+ttl_days: 90
+trust: {osm_tag: 0.6, hotelier: 0.6}
+demand: 0.08
+search:
+  synonyms: ["аптек", "круглосуточн аптек", "pharmacy"]
+  desired: true

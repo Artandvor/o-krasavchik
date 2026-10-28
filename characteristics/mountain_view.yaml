@@ -1,0 +1,20 @@
+key: mountain_view
+title: Вид на горы
+group: Вид из окна
+description: Виден ли Кавказский хребет / горы выше 600 м из окон.
+scope: room
+type: bool
+tool: viewshed
+params: {target: mountain, min_prob: 0.6}
+sources: ["Copernicus DEM GLO-30 (рельеф до 60 км)", "OpenStreetMap: здания"]
+ttl_days: 365
+trust: {geo: 0.75, hotelier: 0.8}
+demand: 0.15
+hotelier:
+  ask_below: 0.7
+  question: "Видны ли горы из номеров? С какой стороны и с каких этажей?"
+  hypothesis: "По расчёту горы видны {summary}. Это так?"
+  fields: {value: bool, from_floor: int, sides: list}
+search:
+  synonyms: ["вид на горы", "видом на горы", "горы из окна", "на горы", "mountain view", "красивый вид", "красивым видом"]
+  desired: true

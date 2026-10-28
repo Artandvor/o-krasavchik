@@ -1,0 +1,38 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt -r requirements-pipeline.txt
+      - run: python -m pytest -q
+
+  compose:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: docker compose up --build (без аргументов)
+        run: docker compose up --build -d
+      - name: ждём healthcheck
+        run: |
+          for i in $(seq 1 40); do
+            s=$(docker inspect -f '{{.State.Health.Status}}' "$(docker compose ps -q app)")
+            echo "health: $s"; [ "$s" = healthy ] && break; sleep 5
+          done
+          [ "$s" = healthy ]
+      - name: проверяем /health и главную
+        run: |
+          curl -fsS http://localhost:8080/health
+          curl -fsS http://localhost:8080/ | grep -q "дин шаг"
+          curl -fsS "http://localhost:8080/api/search?q=закат%20над%20морем&month=7" | head -c 300
+      - if: always()
+        run: docker compose logs app | tail -100
+      - if: always()
+        run: docker compose down

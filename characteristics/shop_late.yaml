@@ -1,0 +1,15 @@
+key: shop_late
+title: Магазин рядом допоздна
+group: Что работает ночью
+description: Продуктовый магазин или супермаркет до 23:30 и позже (или 24/7) в 600 м пешком.
+scope: hotel
+type: bool
+tool: poi_nearby
+params: {layer: pois, filter: {shop: [convenience, supermarket, alcohol, kiosk]}, radius_m: 600, open_after: "23:30"}
+sources: ["OpenStreetMap: часы работы"]
+ttl_days: 90
+trust: {osm_tag: 0.6}
+demand: 0.07
+search:
+  synonyms: ["магазин", "круглосуточн", "продукты"]
+  desired: true

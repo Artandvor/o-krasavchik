@@ -1,0 +1,15 @@
+key: late_food
+title: Где поесть после 23:00
+group: Что работает ночью
+description: Кафе, рестораны или фастфуд, открытые после 23:00, в 500 м пешком.
+scope: hotel
+type: bool
+tool: poi_nearby
+params: {layer: pois, filter: {amenity: [cafe, restaurant, fast_food, bar, pub]}, radius_m: 500, open_after: "23:00"}
+sources: ["OpenStreetMap: часы работы"]
+ttl_days: 90
+trust: {osm_tag: 0.6}
+demand: 0.1
+search:
+  synonyms: ["поесть ночью", "поздно поесть", "ночью кафе", "после 23", "ночная еда", "кафе ночью", "работает ночью", "после полуночи", "поесть поздно", "поесть после", "ужин поздно", "поздний ужин", "перекусить ночью", "круглосуточн", "ночью поесть"]
+  desired: true

@@ -1,0 +1,9 @@
+# Для локальной разработки: cp docker-compose.override.yml.example docker-compose.override.yml
+# Код монтируется в контейнер, сервер перезапускается при изменениях.
+services:
+  app:
+    environment:
+      RELOAD: "1"
+    volumes:
+      - ./app:/app/app
+      - ./characteristics:/app/characteristics

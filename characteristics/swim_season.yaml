@@ -1,0 +1,15 @@
+key: swim_season
+title: Купальный сезон
+group: Климат
+description: Месяцы, когда море ≥ 20 °C, а воздух днём ≥ 22 °C (среднее по годам).
+scope: region
+type: months
+tool: climate
+params: {sea_min: 20, air_min: 22}
+sources: ["Open-Meteo Marine (температура моря)", "Open-Meteo Historical / ERA5 (воздух)"]
+ttl_days: 365
+trust: {open_api: 0.85}
+demand: 0.1
+search:
+  synonyms: ["купаться", "искупаться", "тёплое море", "теплое море", "вода тепл"]
+  desired: true

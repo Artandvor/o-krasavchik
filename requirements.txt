@@ -1,0 +1,10 @@
+# Рантайм приложения (версии зафиксированы)
+numpy==2.2.6
+scipy==1.15.3
+shapely==2.1.2
+networkx==3.4.2
+fastapi==0.115.12
+uvicorn==0.34.3
+pyyaml==6.0.2
+httpx==0.28.1
+python-dotenv==1.1.0

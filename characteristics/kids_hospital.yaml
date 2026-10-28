@@ -1,0 +1,17 @@
+key: kids_hospital
+title: Детская больница
+group: С детьми
+description: Расстояние до ближайшей детской больницы или поликлиники.
+scope: hotel
+type: number
+unit: км
+tool: distance_to
+params: {layer: pois, filter: {"name~": ["детск"], "healthcare:speciality": "re:paediatric"}, require: {amenity: [hospital, clinic, doctors], healthcare: [hospital, clinic, doctor]}}
+sources: ["OpenStreetMap: больницы и поликлиники"]
+ttl_days: 365
+trust: {osm_tag: 0.7}
+demand: 0.05
+search:
+  synonyms: ["детская больниц", "больниц", "педиатр"]
+  op: "<="
+  default: 5

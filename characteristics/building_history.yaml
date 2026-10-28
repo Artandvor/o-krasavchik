@@ -1,0 +1,15 @@
+key: building_history
+title: История здания
+group: Атмосфера
+description: Год постройки, архитектурный стиль, статус памятника — из отметок на открытой карте.
+scope: hotel
+type: text
+tool: building_history
+params: {}
+sources: ["OpenStreetMap: год постройки, стиль, статус памятника"]
+ttl_days: 730
+trust: {osm_tag: 0.6, hotelier: 0.8}
+demand: 0.03
+search:
+  synonyms: ["истори", "старинн", "особняк", "памятник", "историческ"]
+  desired: true

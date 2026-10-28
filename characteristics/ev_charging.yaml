@@ -1,0 +1,15 @@
+key: ev_charging
+title: Зарядка для электромобиля
+group: На машине
+description: Зарядная станция в 1.5 км пешком.
+scope: hotel
+type: bool
+tool: poi_nearby
+params: {layer: pois, filter: {amenity: charging_station}, radius_m: 1500}
+sources: ["OpenStreetMap: зарядные станции"]
+ttl_days: 180
+trust: {osm_tag: 0.65, hotelier: 0.8}
+demand: 0.03
+search:
+  synonyms: ["зарядк", "электромобил", "электрокар", "tesla", "ev"]
+  desired: true

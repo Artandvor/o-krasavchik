@@ -1,0 +1,20 @@
+key: sunset_view
+title: Вид на закат
+group: Вид из окна
+description: Видно ли заходящее солнце из окон, в какие месяцы и с какого этажа; над морем ли закат.
+scope: room
+type: bool
+tool: viewshed
+params: {target: sunset, min_prob: 0.6}
+sources: ["Положение солнца (алгоритм NOAA)", "Copernicus DEM GLO-30", "OpenStreetMap: здания"]
+ttl_days: 365
+trust: {geo: 0.8, hotelier: 0.8}
+demand: 0.25
+hotelier:
+  ask_below: 0.7
+  question: "Видно ли закат из номеров? С какой стороны и с каких этажей?"
+  hypothesis: "По расчёту закат виден {summary}. Это так?"
+  fields: {value: bool, from_floor: int, sides: list}
+search:
+  synonyms: ["закат", "заката", "закатом", "sunset", "солнце садится", "романтик", "закат вдвоем"]
+  desired: true

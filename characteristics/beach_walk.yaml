@@ -1,0 +1,22 @@
+key: beach_walk
+title: Пешком до пляжа
+group: Доступность
+description: Время и путь до ближайшего пляжа по реальным пешеходным дорожкам с учётом подъёмов.
+scope: hotel
+type: number
+unit: мин
+tool: walk_route
+params: {target: beach, metric: minutes}
+sources: ["OpenStreetMap: пешеходная сеть и пляжи", "Copernicus DEM (перепады высот)"]
+ttl_days: 180
+trust: {geo: 0.85, hotelier: 0.6, osm_tag: 0.3}
+demand: 0.5
+hotelier:
+  ask_below: 0.6
+  question: "Сколько минут пешком от отеля до пляжа и каким путём?"
+  hypothesis: "По маршруту на открытой карте до пляжа {summary}. Это так?"
+  fields: {value: number}
+search:
+  synonyms: ["пляж", "до моря", "у моря", "рядом с морем", "к морю", "недалеко от моря", "первая линия", "близко к морю"]
+  op: "<="
+  default: 10

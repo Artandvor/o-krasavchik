@@ -1,0 +1,16 @@
+.git
+.venv*
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.env
+data/raw
+data/odin.sqlite*
+*.command
+docs/demo
+voices
+.github
+.sync
+._*
+.DS_Store
+docker-compose.override.yml

@@ -1,0 +1,19 @@
+key: blackout
+title: Плотные шторы (блэкаут)
+group: Комфорт
+description: Есть ли в номерах светонепроницаемые шторы, чтобы выспаться днём.
+scope: hotel
+type: bool
+tool: hotelier_only
+params: {}
+sources: ["отельер"]
+ttl_days: 365
+trust: {hotelier: 0.9}
+demand: 0.06
+hotelier:
+  ask_below: 0.9
+  question: "Есть ли в номерах плотные (блэкаут) шторы?"
+  fields: {value: bool}
+search:
+  synonyms: ["шторы", "блэкаут", "blackout", "темно", "выспаться днём", "выспаться днем"]
+  desired: true

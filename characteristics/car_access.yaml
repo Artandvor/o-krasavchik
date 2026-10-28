@@ -1,0 +1,20 @@
+key: car_access
+title: Подъезд на машине
+group: На машине
+description: Можно ли подъехать ко входу (рядом проезжая дорога) или отель в пешеходной зоне; парковки рядом.
+scope: hotel
+type: bool
+tool: drive_access
+params: {max_road_m: 30, parking_radius_m: 300}
+sources: ["OpenStreetMap: проезжие дороги, ограничения въезда, парковки"]
+ttl_days: 180
+trust: {geo: 0.7, hotelier: 0.85}
+demand: 0.12
+hotelier:
+  ask_below: 0.6
+  question: "Можно ли подъехать на машине к входу? Есть ли своя парковка и сколько она стоит?"
+  hypothesis: "По данным открытой карты: {summary}. Это так?"
+  fields: {value: bool, parking: bool, parking_fee_rub: int}
+search:
+  synonyms: ["на машине", "парковк", "подъехать", "на авто", "машин"]
+  desired: true
