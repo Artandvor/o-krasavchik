@@ -24,7 +24,10 @@ def same_value(spec, a, b):
             return True
         return abs(float(va) - float(vb)) <= max(2.0, 0.3 * max(abs(float(va)), abs(float(vb))))
     if spec["type"] == "months":
-        sa, sb = set(va or []), set(vb or [])
+        if not isinstance(va, (list, tuple)) or not isinstance(vb, (list, tuple)):
+            # «да/нет» вместо списка месяцев (подтверждение без уточнения) — сравниваем по смыслу
+            return bool(va) == bool(vb)
+        sa, sb = set(va), set(vb)
         return len(sa ^ sb) <= 2
     if spec["type"] == "text":
         return True
