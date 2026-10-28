@@ -95,7 +95,7 @@ const Win = (() => {
       <linearGradient id="${id}h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${z3}" stop-opacity="0"/><stop offset="1" stop-color="${mix(z3, "#ffffff", .25)}" stop-opacity=".55"/></linearGradient>
       <radialGradient id="${id}g"><stop offset="0" stop-color="#FFF6E0" stop-opacity="1"/><stop offset=".12" stop-color="#FFE2A6" stop-opacity=".85"/><stop offset=".35" stop-color="#FFB46A" stop-opacity=".35"/><stop offset="1" stop-color="#FF7A45" stop-opacity="0"/></radialGradient>
       <radialGradient id="${id}v" cx=".5" cy=".45" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></radialGradient>
-      ${opts.grain ? `<filter id="${id}n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .07 0"/></filter>` : ""}
+      ""}
     </defs>`;
     g += `<rect width="${W}" height="${y0 + 2}" fill="url(#${id}s)"/>`;
     if (el < -5) { const r = rand(7); for (let i = 0; i < 90; i++) g += `<circle cx="${(r() * W).toFixed(0)}" cy="${(r() * y0 * .75).toFixed(0)}" r="${(r() * 1.2 + .3).toFixed(1)}" fill="#fff" opacity="${(r() * .6 + .2 * (1 - L)).toFixed(2)}"/>`; }
@@ -168,7 +168,6 @@ const Win = (() => {
       }
     }
     g += `<rect width="${W}" height="${H}" fill="url(#${id}v)"/>`;
-    if (opts.grain) g += `<rect width="${W}" height="${H}" filter="url(#${id}n)"/>`;
     let vb = `0 0 ${W} ${H}`;
     if (opts.cropTo != null) {
       const span = opts.cropSpan || 80, c = ((rel(opts.cropTo, side.az) + FOV) / (2 * FOV)) * W, wpx = (span / (2 * FOV)) * W;

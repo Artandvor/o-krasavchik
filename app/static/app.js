@@ -47,6 +47,16 @@ function tripDate(m, d) {
   return `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 }
 const DEFAULT_DATE = tripDate(7, 15);
+// плитка шума для зерна — один раз на загрузку
+(function grainTile() {
+  try {
+    const c = document.createElement("canvas"); c.width = c.height = 160;
+    const x = c.getContext("2d"), d = x.createImageData(160, 160);
+    for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+    x.putImageData(d, 0, 0);
+    document.documentElement.style.setProperty("--grain-tile", `url(${c.toDataURL("image/png")})`);
+  } catch (e) { /* без зерна */ }
+})();
 // дата из адреса: «2027-07-15» или «07-15»; всё остальное — дата по умолчанию
 function normDate(d) {
   const p = String(d || "").split("-").map(Number);
@@ -113,7 +123,7 @@ const readWhen = () => tripDate(Number($("#wm").value), Number($("#wd").value));
 async function guestHome() {
   view().innerHTML = `
   <section class="hero">
-    <div class="hero-window" id="heroWin"></div>
+    <div class="hero-window grain" id="heroWin"></div>
     <div class="hero-in">
       <h1>Сначала закат.<br>Потом отель.</h1>
       <p class="lead">Расскажи, ради какого момента ты едешь. Мы по рельефу, домам и солнцу найдём окно, из которого это правда случится, и попросим отель дать тебе именно его.</p>
@@ -236,7 +246,7 @@ async function guestWindow(id, q) {
   view().innerHTML = `<div class="wrap">
     <a class="link small" href="javascript:history.back()">Назад к окнам</a>
     <div class="detail-head"><div><h1>${esc(hotel.name)}</h1><div class="small muted">${esc(KIND[hotel.kind] || "")}${hotel.stars ? `, ${hotel.stars}★` : ""}${hotel.address ? `, ${esc(hotel.address)}` : ""}${hotel.levels ? `, ${hotel.levels} ${plural(hotel.levels, "этаж", "этажа", "этажей")}` : ""}</div></div></div>
-    <section class="stage" id="stage"></section>
+    <section class="stage grain" id="stage"></section>
     <div class="two">
       <div>
         <div class="signature" id="sig"></div>
@@ -272,14 +282,17 @@ async function guestWindow(id, q) {
     $("#fup").addEventListener("click", () => changeFloor(1));
     $("#play").addEventListener("click", playToSunset);
   };
-  const stop = () => { if (playing) { clearTimeout(playing); playing = null; } };
+  const stop = () => { if (playing) { cancelAnimationFrame(playing); playing = null; } };
   const playToSunset = () => {
     stop();
     const ev = Win.events(sdOf(), p.sun);
     const end = p.sun.track.findIndex((x) => x[0] >= (ev.sunset ? hhmmMinus(ev.sunset.t, -6) : p.sun.sunset?.[0] || "20:00"));
     // проигрываем последний час перед закатом по минуте: солнце плавно опускается в море
     timeIdx = Math.max(0, end - 14);
-    const step = () => { if (!$("#stage")) return; if (timeIdx < end) { timeIdx = Math.min(end, timeIdx + 0.2); drawStage(); playing = setTimeout(step, 60); } };
+    // кадр — по requestAnimationFrame, не чаще ~16 к/с: плавно и без лишней нагрузки на слабых машинах
+    let last = 0;
+    const step = (ts) => { if (!$("#stage") || !playing) return; if (ts - last >= 60) { last = ts; timeIdx = Math.min(end, timeIdx + 0.2); drawStage(); } if (timeIdx < end) playing = requestAnimationFrame(step); else playing = null; };
+    playing = requestAnimationFrame(step);
     step();
   };
   const changeFloor = async (d) => {

@@ -23,6 +23,18 @@ LOCK = threading.Lock()
 JOBS = {}
 
 
+@app.on_event("startup")
+def _warmup():
+    """Прогрев в фоне: геоконтекст и индекс поиска грузятся до первого запроса гостя."""
+    def go():
+        try:
+            _ctx()
+            search("закат", 3, log=False)
+        except Exception as e:  # noqa: BLE001
+            print("[warmup]", e, flush=True)
+    threading.Thread(target=go, daemon=True).start()
+
+
 def _ctx():
     ctx = get_ctx()
     if not getattr(ctx, "_whatif_applied", False):

@@ -287,3 +287,7 @@ pre.spec { background: var(--soft); border-radius: 12px; padding: 14px; overflow
 .search .when select { border: 0; padding: 2px 0; font-size: 15px; }
 details summary { cursor: pointer; color: var(--muted, #6B6F74); margin-top: 4px; }
 details[open] summary { margin-bottom: 4px; }
+
+/* киноплёночное зерно: одна плитка шума (рисуется один раз), а не SVG-фильтр на каждом кадре */
+.grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: var(--grain-tile, none); background-size: 160px 160px; opacity: .09; mix-blend-mode: overlay; }
+.grain::after { z-index: 1; }
